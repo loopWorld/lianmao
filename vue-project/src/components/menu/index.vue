@@ -1,17 +1,18 @@
 <template>
-    <van-tabbar v-model="active" class="navList" active-color="rgb(254, 79, 112)">
-        <van-tabbar-item v-for="{ title,path,imgSrc,activeimgSrc },index in navList" :key="index" @click="router.push(path)">
+    <Tabbar v-model="active" class="navList" active-color="rgb(254, 79, 112)">
+        <TabbarItem v-for="{ title,path,imgSrc,activeimgSrc },index in navList" :key="index" @click="router.push(path)">
             <span>{{ title }}</span>
             <template #icon="props">
                 <img :src="imgPath+(active === index ? activeimgSrc : imgSrc)" />
             </template>
-        </van-tabbar-item>
-    </van-tabbar>
+        </TabbarItem>
+    </Tabbar>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router'
+import { Tabbar, TabbarItem } from 'vant';
 
 const active = ref<number>(0);
 const router = useRouter()
