@@ -24,6 +24,7 @@ header {
     align-items: center;
     justify-content: space-between;
     top: 10px;
+    z-index: 10;
 
     &>div {
         width: 308px;
@@ -32,6 +33,7 @@ header {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        border-radius: 5px;
 
         img {
             width: 20px;
