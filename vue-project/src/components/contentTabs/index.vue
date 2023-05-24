@@ -8,19 +8,21 @@
                 <span class="tabName">{{ name }}</span>
             </div>
         </div>
-        <Swipe touchable width="375" ref="swiper" duration="300">
+        <Swipe width="375" ref="swiper" duration="300" :touchable='false'>
             <div class="flex">
                 <SwipeItem v-for="{id,shops} in fenleiList" :key="id">
                     <ul>
-                        <li v-for="{id:id1,imgSrc} in shops" :key="id1">
+                        <li v-for="{id:id1,imgSrc,title,multiple} in shops" :key="id1">
                             <div class="itemImg">
                                 <img :src="imgPath + imgSrc" />
                             </div>
                             <div class="itemLayout">
-                                <div class="itemTitle"></div>
+                                <div class="itemTitle">{{ title }}</div>
                                 <div class="itemDesc">
-                                    <div class="price"></div>
-                                    <div class="addIcon"></div>
+                                    <div class="price">{{ multiple }}倍算</div>
+                                    <div class="addIcon">
+                                        <img src="@/images/svgs/add.svg" />
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -63,9 +65,9 @@ let changHandle = (val: number,): void => {
 <style scoped lang="scss">
 section {
     margin-bottom: 60px;
-    padding: 12px;
     width: 100vw;
     overflow: hidden;
+    padding: 12px 0;
 
     .headerBtn {
         width: 100%;
@@ -74,6 +76,7 @@ section {
         align-items: center;
         position: relative;
         justify-content: space-between;
+        padding: 0 12px;
 
         .border {
             width: 37.5px;
@@ -110,7 +113,59 @@ section {
     .van-swipe {
         .flex {
             .van-swipe-item {
-                height: 300px;
+                padding: 12px;
+                ul {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    width: 100%;
+                    li {
+                        width: 165px;
+                        margin-top: 10px;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        background: #fff;
+                        box-shadow: 0 2px 12px rgba(0,0,0,.1);
+                        .itemImg {
+                            img {
+                                width: 165px;
+                                height: 196px;
+                            }
+                        }
+                        .itemLayout {
+                            padding: 0 10px;
+                            width: 100%;
+                            display: flex;
+                            justify-content: flex-start;
+                            flex-direction: column;
+                            .itemTitle {
+                                font-size: 12px;
+                                color: #949497;
+                            }
+                            .itemDesc {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                padding-bottom: 10px;
+                                .price {
+                                    padding: 5px;
+                                    font-size: 12px;
+                                    color: #fff;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    background: #d8182d;
+                                    border-radius: 10px;
+                                    margin-top: 5px;
+                                }
+                                .addIcon {
+                                    width: 24px;
+                                    height: 24px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
