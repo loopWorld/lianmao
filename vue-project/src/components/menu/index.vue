@@ -56,6 +56,7 @@ const navList = [
     position: fixed;
     bottom: 0;
     z-index: 10;
+    background: #fff;
     div {
         display: flex;
         flex-direction: column;
