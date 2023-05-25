@@ -57,10 +57,10 @@
             <button class="y">加入购物车</button>
             <button class="r">立即购买</button>
         </div>
-        <div class="actionSheet">
+        <div class="actionSheet" :class="{show}">
 
             <div class="content">
-                <span class="close">
+                <span class="close" @click="show = false">
                     <img src="@/images/svgs/close-popup.svg" />
                 </span>
                 <ul class="itop">
@@ -72,21 +72,51 @@
                     </li>
                 </ul>
                 <ul class="ibot">
-                    <li>
+                    <li class="color">
                         <span>颜色</span>
                         <div class="colorList">
-                            <div class="colorTag"></div>
+                            <div class="colorTag">
+                                <img :src="data.imgSrc" />
+                                <span>黑色</span>
+                            </div>
+                            <div class="colorTag">
+                                <img :src="data.imgSrc" />
+                                <span>黑色</span>
+                            </div>
+                            <div class="colorTag">
+                                <img :src="data.imgSrc" />
+                                <span>黑色</span>
+                            </div>
+                            <div class="colorTag">
+                                <img :src="data.imgSrc" />
+                                <span>黑色</span>
+                            </div>
+                            <div class="colorTag">
+                                <img :src="data.imgSrc" />
+                                <span>黑色</span>
+                            </div>
                         </div>
                     </li>
-                    <li>
+                    <li class="size">
                         <span>尺码</span>
                         <div class="sizList">
-                            <div class="sizeTag"></div>
+                            <div class="sizeTag">s</div>
+                            <div class="sizeTag">m</div>
+                            <div class="sizeTag">l</div>
+                            <div class="sizeTag">xl</div>
+                            <div class="sizeTag">2xl</div>
+                            <div class="sizeTag">3xl</div>
+                            <div class="sizeTag">4xl</div>
+                            <div class="sizeTag">sm</div>
                         </div>
                     </li>
-                    <li>
+                    <li class="count">
                         <span>购买数量</span>
-                        <Stepper v-model="value" />
+                        <div>
+                            <button @click="crement('decrement')">-</button>
+                            <input type="text" v-model.number="count">
+                            <button @click="crement('increment')">+</button>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -96,7 +126,7 @@
                 <button class="r">立即购买</button>
             </div>
         </div>
-        <div class="mark"></div>
+        <div class="mark" v-show="show"></div>
     </section>
 </template>
 
@@ -104,11 +134,12 @@
 import { ref } from 'vue';
 import { Swipe, SwipeItem } from 'vant';
 import { useRouter } from 'vue-router';
-import { Stepper } from 'vant';
 const data = JSON.parse(history.state.data)
 const router = useRouter()
-const value = ref<number>()
+let count = ref<number>(0)
 let show = ref<boolean>(false)
+let crement = (type:string):number => count.value = type==='increment' ? count.value + 1 : count.value>0?count.value - 1 : 0;
+
     ; (() => {
         document.body.scrollTop = 0
     })()
@@ -281,6 +312,7 @@ section {
         align-items: center;
         position: fixed;
         bottom: 0;
+        z-index: 10;
 
         button {
             flex: 1;
@@ -303,10 +335,11 @@ section {
         width: 100vw;
         height: 75vh;
         position: fixed;
-        bottom: 0;
+        bottom: -75vh;
         background: #fff;
         border-radius: 15px 15px 0 0;
-        z-index: 200;
+        z-index: 11;
+        transition: bottom .3s;
 
         .content {
             padding: 20px;
@@ -329,6 +362,7 @@ section {
                     width: 100px;
                     height: 100px;
                 }
+
                 li {
                     display: flex;
                     flex-direction: column;
@@ -338,21 +372,113 @@ section {
                     height: 100px;
                     margin-left: 10px;
                     box-sizing: border-box;
+
                     span {
                         padding: 5px 0;
                     }
+
                     .price {
                         color: #d8182d;
                         font-size: 17px;
                         font-weight: 600;
                     }
+
                     .count {
                         font-size: 14px;
                         color: #3a3a3a;
                     }
+
                     .color {
                         font-size: 12px;
                         color: #3a3a3a;
+                    }
+                }
+            }
+
+            .ibot {
+                &>li {
+                    &>span {
+                        font-size: 14px;
+                        color: #3a3a3a;
+                        padding-bottom: 10px;
+                    }
+
+                    &>div {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                    }
+                }
+
+                .color {
+                    .colorTag {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        width: 67px;
+                        height: 27px;
+                        font-size: 14px;
+                        background: #efeff4;
+                        border: 1px solid #efeff4;
+                        border-radius: 5px;
+                        margin-right: 16px;
+                        margin-top: 10px;
+                        padding-right: 10px;
+                        box-sizing: content-box;
+
+                        img {
+                            width: 24px;
+                            height: 24px;
+                            padding: 0 10px 0 2px;
+                        }
+                    }
+                }
+
+                .size {
+                    .sizeTag {
+                        font-size: 13px;
+                        color: #000;
+                        width: 42px;
+                        height: 24px;
+                        margin: 10px 16px 0 0;
+                        display: flex;
+                        justify-content: center;
+                        border-radius: 5px;
+                        align-items: center;
+                        background: #efeff4;
+                    }
+                }
+
+                &>.count {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 32px;
+
+                    span {
+                        padding: 0;
+                    }
+
+                    &>div {
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        button {
+                            flex: 1;
+                            width: 20px;
+                            background: #fff;
+                            font-size: 25px;
+                            border: none;
+                        }
+                        input {
+                            flex: 1;
+                            width: 20px;
+                            text-align: center;
+                            margin: 0 5px;
+                        }
                     }
                 }
             }
@@ -366,5 +492,9 @@ section {
         inset: 0;
         background: rgba(0, 0, 0, .65);
         z-index: 0;
+    }
+
+    .show {
+        bottom: 0;
     }
 }</style>
