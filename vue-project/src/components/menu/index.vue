@@ -1,9 +1,9 @@
 <template>
     <Tabbar v-model="active" class="navList" active-color="rgb(254, 79, 112)">
-        <TabbarItem v-for="{ title,path,imgSrc,activeimgSrc },index in navList" :key="index" @click="router.push(path)">
+        <TabbarItem v-for="{ title, path, imgSrc, activeimgSrc }, index in navList" :key="index" @click="router.push(path)">
             <span>{{ title }}</span>
             <template #icon="props">
-                <img :src="imgPath+(active === index ? activeimgSrc : imgSrc)" />
+                <img :src="imgPath + (active === index ? activeimgSrc : imgSrc)" />
             </template>
         </TabbarItem>
     </Tabbar>
@@ -14,10 +14,10 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router'
 import { Tabbar, TabbarItem } from 'vant';
 
-const active = ref<number>(0);
+const active = ref<number>();
 const router = useRouter()
 const imgPath = 'src/images/'
-const navList = [
+let navList = [
     {
         title: '首页',
         path: 'home',
@@ -44,6 +44,15 @@ const navList = [
     }
 ]
 
+setTimeout(() => {
+    switch(router.currentRoute.value.fullPath) {
+        case '/home': return active.value = 0
+        case '/classification': return active.value = 1
+        case '/shopCar': return active.value = 2
+        case '/profile': return active.value = 3
+    }
+}, 0)
+
 </script>
 
 <style scoped lang="scss">
@@ -57,17 +66,19 @@ const navList = [
     bottom: 0;
     z-index: 10;
     background: #fff;
+
     div {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         span {
             font-size: 12px;
         }
+
         img {
             width: 18px;
             height: 18px;
         }
     }
-}
-</style>
+}</style>

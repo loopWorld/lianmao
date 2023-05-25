@@ -10,11 +10,12 @@
         </div>
         <Swipe width="375" ref="swiper" duration="300" :touchable='false'>
             <div class="flex">
-                <SwipeItem v-for="{id,shops} in fenleiList" :key="id">
+                <SwipeItem v-for="{ id, shops } in fenleiList" :key="id">
                     <ul>
-                        <li v-for="{id:id1,imgSrc,title,multiple} in shops" :key="id1">
+                        <li v-for="{ id: id1, imgSrc, title, multiple, price }, index in shops" :key="id1"
+                            @click="fn(shops[index])">
                             <div class="itemImg">
-                                <img :src="imgPath + imgSrc" />
+                                <img :src="imgSrc" />
                             </div>
                             <div class="itemLayout">
                                 <div class="itemTitle">{{ title }}</div>
@@ -36,14 +37,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Swipe, SwipeItem } from 'vant';
+import { useRouter } from 'vue-router'
 
 const imgPath = 'src/images/shop/'
+
+const router = useRouter();
 
 interface fenleiList {
     id: number,
     title: string,
     name: string,
-    shops: object
+    shops: any
 }
 
 let active = ref<number>(0)
@@ -53,12 +57,20 @@ let changHandle = (val: number,): void => {
     active.value = val;
     swiper.value.swipeTo(val)
 };
+let fn = (val: any): void => {
+    // 由于之前的params传参在页面刷新之后，参数会丢失，所以vue将这种方法移除，建议改为下方这种使用state传递，利用history来接收
+    router.push({ name: 'product', state: { data: JSON.stringify(val) } });
+}
 
-; (async () => {
-    const res = await fetch('http://127.0.0.1:3000/fenlei')
-    const result = await res.json()
-    fenleiList.value = result.val;
-})()
+    ; (async () => {
+        const res = await fetch('http://127.0.0.1:3000/fenlei')
+        const result = await res.json()
+        fenleiList.value = result.val;
+
+        fenleiList.value.forEach(item => item.shops.map((s: any) => s.imgSrc = new URL('../../images/shop/' + s.imgSrc, import.meta.url).href))
+
+    })()
+
 
 </script>
 
@@ -114,39 +126,46 @@ section {
         .flex {
             .van-swipe-item {
                 padding: 12px;
+
                 ul {
                     display: flex;
                     justify-content: space-between;
                     flex-wrap: wrap;
                     width: 100%;
+
                     li {
                         width: 165px;
                         margin-top: 10px;
                         border-radius: 10px;
                         overflow: hidden;
                         background: #fff;
-                        box-shadow: 0 2px 12px rgba(0,0,0,.1);
+                        box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
+
                         .itemImg {
                             img {
                                 width: 165px;
                                 height: 196px;
                             }
                         }
+
                         .itemLayout {
                             padding: 0 10px;
                             width: 100%;
                             display: flex;
                             justify-content: flex-start;
                             flex-direction: column;
+
                             .itemTitle {
                                 font-size: 12px;
                                 color: #949497;
                             }
+
                             .itemDesc {
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
                                 padding-bottom: 10px;
+
                                 .price {
                                     padding: 5px;
                                     font-size: 12px;
@@ -158,6 +177,7 @@ section {
                                     border-radius: 10px;
                                     margin-top: 5px;
                                 }
+
                                 .addIcon {
                                     width: 24px;
                                     height: 24px;
