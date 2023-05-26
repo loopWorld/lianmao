@@ -8,21 +8,26 @@
                 <span class="tabName">{{ name }}</span>
             </div>
         </div>
-        <Swipe width="375" ref="swiper" duration="300" :touchable='false'>
+        <Swipe width="375" ref="swiper" duration="300" :touchable='false' :show-indicators="false" lazy-render>
             <div class="flex">
                 <SwipeItem v-for="{ id, shops } in fenleiList" :key="id">
                     <ul>
                         <li v-for="{ id: id1, imgSrc, title, multiple, price }, index in shops" :key="id1"
                             @click="fn(shops[index])">
                             <div class="itemImg">
-                                <img :src="imgSrc" />
+                                <Skeleton :loading="isLoading">
+                                    <img v-mylazy="'http://123.60.208.96:3000/images/shop/'+imgSrc" />
+                                    <template #template>
+                                        <SkeletonImage :style="{ width: '165px', height: '196px',background: '#fff' }" />
+                                    </template>
+                                </Skeleton>
                             </div>
                             <div class="itemLayout">
                                 <div class="itemTitle">{{ title }}</div>
                                 <div class="itemDesc">
                                     <div class="price">{{ multiple }}倍算</div>
                                     <div class="addIcon">
-                                        <img src="@/images/svgs/add.svg" />
+                                        <img src="http://123.60.208.96:3000/images/svgs/add.svg" />
                                     </div>
                                 </div>
                             </div>
@@ -35,11 +40,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref,nextTick } from 'vue';
 import { Swipe, SwipeItem } from 'vant';
 import { useRouter } from 'vue-router'
-
-const imgPath = 'src/images/shop/'
+import {
+    Skeleton,
+    SkeletonImage,
+} from 'vant';
 
 const router = useRouter();
 
@@ -52,6 +59,7 @@ interface fenleiList {
 
 let active = ref<number>(0)
 let swiper = ref()
+let isLoading = ref<boolean>(false)
 let fenleiList = ref<Array<fenleiList>>([])
 let changHandle = (val: number,): void => {
     active.value = val;
@@ -63,12 +71,15 @@ let fn = (val: any): void => {
 }
 
     ; (async () => {
-        const res = await fetch('http://127.0.0.1:3000/fenlei')
+        console.time()
+        const res = await fetch('http://123.60.208.96:3000/fenlei')
         const result = await res.json()
         fenleiList.value = result.val;
-
-        fenleiList.value.forEach(item => item.shops.map((s: any) => s.imgSrc = new URL('../../images/shop/' + s.imgSrc, import.meta.url).href))
-
+        nextTick(() => {
+            isLoading.value = false
+            console.timeEnd()
+        })
+        
     })()
 
 

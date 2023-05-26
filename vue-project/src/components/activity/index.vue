@@ -11,17 +11,17 @@
                 </div>
                 <div class="itemBot">
                     <div class="itemContent">
-                        <img src="@/images/home/demo1.png" />
+                        <img src="http://123.60.208.96:3000/images/home/demo1.png" />
                         <span>￥298</span>
                         <s>￥399</s>
                     </div>
                     <div class="itemContent">
-                        <img src="@/images/home/demo2.png" />
+                        <img src="http://123.60.208.96:3000/images/home/demo2.png" />
                         <span>￥298</span>
                         <s>￥399</s>
                     </div>
                     <div class="itemContent">
-                        <img src="@/images/home/demo3.png" />
+                        <img src="http://123.60.208.96:3000/images/home/demo3.png" />
                         <span>￥298</span>
                         <s>￥399</s>
                     </div>
@@ -34,8 +34,8 @@
                 </div>
                 <span>好物不贵</span>
                 <div class="itemImgs">
-                    <img src="@/images/home/demo4.png" />
-                    <img src="@/images/home/demo5.png" />
+                    <img src="http://123.60.208.96:3000/images/home/demo4.png" />
+                    <img src="http://123.60.208.96:3000/images/home/demo5.png" />
                 </div>
             </li>
         </ul>
@@ -43,22 +43,22 @@
             <li class="conItem">
                 <span class="contentTitle">特价秒杀</span>
                 <span class="contentDescr" style="color: #ff9351">10元抢购</span>
-                <img src="@/images/home/demo6.png" />
+                <img src="http://123.60.208.96:3000/images/home/demo6.png" />
             </li>
             <li class="conItem">
                 <span class="contentTitle">品牌秒杀</span>
                 <span class="contentDescr" style="color: #dd3749">笔记本秒杀</span>
-                <img src="@/images/home/demo7.png" />
+                <img src="http://123.60.208.96:3000/images/home/demo7.png" />
             </li>
             <li class="conItem">
                 <span class="contentTitle">新品首发</span>
                 <span class="contentDescr" style="color: #ff9351">小黑盒新品</span>
-                <img src="@/images/home/demo8.png" />
+                <img src="http://123.60.208.96:3000/images/home/demo8.png" />
             </li>
             <li class="conItem">
                 <span class="contentTitle">优品排行</span>
                 <span class="contentDescr" style="color: #91c95b">榜上好物购</span>
-                <img src="@/images/home/demo9.png" />
+                <img src="http://123.60.208.96:3000/images/home/demo9.png" />
             </li>
         </ul>
         <ul class="spikeBot">
@@ -69,8 +69,8 @@
                 </div>
                 <span>信赖大品牌</span>
                 <div class="itemImgs">
-                    <img src="@/images/home/demo10.png" />
-                    <img src="@/images/home/demo11.png" />
+                    <img src="http://123.60.208.96:3000/images/home/demo10.png" />
+                    <img src="http://123.60.208.96:3000/images/home/demo11.png" />
                 </div>
             </li>
             <li class="iBotItem">
@@ -80,8 +80,8 @@
                 </div>
                 <span>来逛个够</span>
                 <div class="itemImgs">
-                    <img src="@/images/home/demo12.png" />
-                    <img src="@/images/home/demo13.png" />
+                    <img src="http://123.60.208.96:3000/images/home/demo12.png" />
+                    <img src="http://123.60.208.96:3000/images/home/demo13.png" />
                 </div>
             </li>
         </ul>

@@ -4,18 +4,27 @@
         <div class="content">
             <div class="lef">
                 <ul class="list">
-                    <li class="lis" v-for="{ id, title }, index in data" :key="id" v-html="fn(title)"
-                        @click="active = index" :class="{ active: active == index }"></li>
+                    <li class="lis" v-for="{ name }, index in data" :key="name" v-html="fn(name)" @click="active = index"
+                        :class="{ active: active == index }"></li>
                 </ul>
             </div>
             <div class="rig">
-                <div v-for="{ id: did, tmenu }, index in data" :key="did" v-show="active == index" class="s1">
-                    <div v-for="{ id: tid, title: ttitle, shops }, index in tmenu" :key="tid" class="s2">
+                <div v-for="{ list }, index in data" :key="index" v-show="active == index" class="s1">
+                    <div v-for="{ title: ttitle, productList }, index in list" :key="ttitle" class="s2">
                         <p>{{ ttitle }}</p>
                         <ul>
-                            <li v-for="{ id: sid, title: stitle }, index in shops" :key="sid" class="s3">
-                                <img src="../../images/shop/钟表-6.png" />
-                                <div>{{ stitle }}</div>
+                            <li v-for="{ title: stitle, imgUrl }, index in productList" :key="stitle" class="s3">
+                                {{ (() => {
+                                    arr.push(true)
+                                    return undefined
+                                })() }}
+                                <Skeleton :loading="arr[index]">
+                                    <img v-mylazy="imgUrl" @load="fn1(index)"  />
+                                    <div>{{ stitle }}</div>
+                                    <template #template>
+                                        <SkeletonImage :style="{ width: '65px', height: '80px', background: '#fff' }" />
+                                    </template>
+                                </Skeleton>
                             </li>
                         </ul>
                     </div>
@@ -27,20 +36,39 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onUpdated, nextTick,onBeforeMount } from 'vue';
 import Menu from '@/components/menu/index.vue';
+import {
+    Skeleton,
+    SkeletonImage
+} from 'vant';
+
+let arr = ref<Array<boolean>>([])
 let data = ref();
 let active = ref<number>(0)
 
     ; (async () => {
-        const res = await fetch('http://127.0.0.1:3000/getClassifymenu')
+        const res = await fetch('https://lianmall.usemock.com/category', { method: 'post' })
         const result = await res.json()
-        data.value = result.val
+        data.value = result.categoryData
     })()
+
+onUpdated(() => {
+    nextTick(() => {
+
+    })
+})
+onBeforeMount(() => {
+    
+})
 
 function fn(str: string) {
     return `<span>${str[0] + str[1]}</span><span>${str[2] + str[3]}</span>`
 }
+function fn1(index:number) {
+    arr.value[index] = false
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -63,14 +91,13 @@ section {
         height: 567px;
 
         .lef {
-            width: 120px;
+            width: 80px;
             height: 100%;
             overflow: auto;
             box-sizing: content-box;
 
             &::-webkit-scrollbar {
                 display: none;
-                /* Chrome Safari */
             }
 
             .list {
@@ -106,6 +133,7 @@ section {
             overflow-y: auto;
             background: #fff;
             padding: 0 10px 0;
+            flex: 1;
 
             &::-webkit-scrollbar {
                 display: none;
@@ -117,6 +145,8 @@ section {
                 padding-top: 20px;
 
                 .s2 {
+                    width: 100%;
+
                     p {
                         font-size: 14px;
                         color: #d8182d;

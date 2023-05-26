@@ -1,16 +1,16 @@
 <template>
-    <header>
+    <header @click="router.push({name: 'search'})">
         <div>
-            <img src="@/images/svgs/search.svg" />
+            <img src="http://123.60.208.96:3000/images/svgs/search.svg" />
             <div>推荐搜索 关键词</div>
         </div>
-        <img src="@/images/svgs/customer-service.svg" />
+        <img src="http://123.60.208.96:3000/images/svgs/customer-service.svg" />
     </header>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
+import { useRouter } from 'vue-router';
+const router = useRouter()
 </script>
 
 <style scoped lang="scss">

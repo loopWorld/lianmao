@@ -34,6 +34,21 @@ const router = createRouter({
       path: '/product',
       name: 'product',
       component: product
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('@/views/search/index.vue')
+    },
+    {
+      path: '/address',
+      name: 'address',
+      component: () => import('@/views/address/index.vue')
+    },
+    {
+      path: '/incrementAddress',
+      name: 'incrementAddress',
+      component: () => import('@/views/incrementAddress/index.vue')
     }
   ]
 })

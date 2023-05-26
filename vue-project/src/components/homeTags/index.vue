@@ -2,23 +2,23 @@
     <section>
         <ul>
             <li>
-                <img src="@/images/svgs/chain-cat-boutique.svg" />
+                <img src="http://123.60.208.96:3000/images/svgs/chain-cat-boutique.svg" />
                 <span>链猫精品</span>
             </li>
             <li>
-                <img src="@/images/svgs/cm-area.svg" />
+                <img src="http://123.60.208.96:3000/images/svgs/cm-area.svg" />
                 <span>CM专区</span>
             </li>
             <li>
-                <img src="@/images/svgs/collar-cm.svg" />
+                <img src="http://123.60.208.96:3000/images/svgs/collar-cm.svg" />
                 <span>领CM币</span>
             </li>
             <li>
-                <img src="@/images/svgs/coupon-svg.svg" />
+                <img src="http://123.60.208.96:3000/images/svgs/coupon-svg.svg" />
                 <span>领券</span>
             </li>
             <li>
-                <img src="@/images/svgs/chain-cat-member.svg" />
+                <img src="http://123.60.208.96:3000/images/svgs/chain-cat-member.svg" />
                 <span>链猫会员</span>
             </li>
         </ul>

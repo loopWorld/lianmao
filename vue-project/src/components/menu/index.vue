@@ -3,7 +3,7 @@
         <TabbarItem v-for="{ title, path, imgSrc, activeimgSrc }, index in navList" :key="index" @click="router.push(path)">
             <span>{{ title }}</span>
             <template #icon="props">
-                <img :src="imgPath + (active === index ? activeimgSrc : imgSrc)" />
+                <img :src="active === index ? activeimgSrc : imgSrc" />
             </template>
         </TabbarItem>
     </Tabbar>
@@ -16,31 +16,30 @@ import { Tabbar, TabbarItem } from 'vant';
 
 const active = ref<number>();
 const router = useRouter()
-const imgPath = 'src/images/'
 let navList = [
     {
         title: '首页',
         path: 'home',
-        imgSrc: 'home.png',
-        activeimgSrc: 'home_active.png'
+        imgSrc: 'http://123.60.208.96:3000/images/home.png',
+        activeimgSrc: 'http://123.60.208.96:3000/images/home_active.png'
     },
     {
         title: '分类',
         path: 'classification',
-        imgSrc: 'classify.png',
-        activeimgSrc: 'classify_active.png'
+        imgSrc: 'http://123.60.208.96:3000/images/classify.png',
+        activeimgSrc: 'http://123.60.208.96:3000/images/classify_active.png'
     },
     {
         title: '购物车',
         path: 'shopCar',
-        imgSrc: 'cart.png',
-        activeimgSrc: 'cart_active.png'
+        imgSrc: 'http://123.60.208.96:3000/images/cart.png',
+        activeimgSrc: 'http://123.60.208.96:3000/images/cart_active.png'
     },
     {
         title: '我',
         path: 'profile',
-        imgSrc: 'mine.png',
-        activeimgSrc: 'mine_active.png'
+        imgSrc: 'http://123.60.208.96:3000/images/mine.png',
+        activeimgSrc: 'http://123.60.208.96:3000/images/mine_active.png'
     }
 ]
 

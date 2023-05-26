@@ -1,8 +1,14 @@
 import '@/styles/main.scss'
+// 解决vant样式丢失问题 全局引入
+import 'vant/lib/index.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+
+// 全局引入懒加载自定义指令
+import mylazy from '@/directives/index.ts'
+
 
 
 // 重置样式
@@ -22,6 +28,6 @@ window.addEventListener('resize',() => remFit.init())
 const app = createApp(App)
 
 app.use(router)
-
+app.use(mylazy)
 
 app.mount('#app')

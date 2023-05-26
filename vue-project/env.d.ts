@@ -13,3 +13,5 @@ declare module "*.vue" {
 // 解决引入报错
 declare module 'rem-fit'
 declare module '@/api/index.ts'
+declare module 'vue-lazyload'
+declare module '@/directives/index.ts'

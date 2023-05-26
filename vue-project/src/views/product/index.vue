@@ -4,7 +4,7 @@
             <div class="flex">
                 <SwipeItem v-for="item, index in 5" :key="index">
                     <div class="imgBox">
-                        <img :src="data.imgSrc" />
+                        <img :src="PATH+data.imgSrc" />
                     </div>
                 </SwipeItem>
             </div>
@@ -13,7 +13,7 @@
             <div class="productTitle">
                 <div class="titleLeft">{{ data.multiple }}倍算力</div>
                 <div>
-                    <img src="@/images/svgs/heart-null.svg">
+                    <img src="http://123.60.208.96:3000/images/svgs/heart-null.svg">
                 </div>
             </div>
             <div class="productPrice">
@@ -25,7 +25,7 @@
             </div>
             <div class="itemInfo">
                 <div class="itemInfoTItlte">发货地</div>
-                <img src="@/images/svgs/anchor-point.svg" />
+                <img src="http://123.60.208.96:3000/images/svgs/anchor-point.svg" />
             </div>
             <div class="itemInfo">
                 <div class="itemInfoTItlte">品牌</div>
@@ -42,7 +42,7 @@
                     <div>店铺名称</div>
                 </div>
                 <div class="rig">
-                    <img src="@/images/svgs/message-round.svg" />
+                    <img src="http://123.60.208.96:3000/images/svgs/message-round.svg" />
                     <button>进店逛逛</button>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="goBack" @click="router.back()">
-            <img src="@/images/svgs/green-btn.svg">
+            <img src="http://123.60.208.96:3000/images/svgs/green-btn.svg">
         </div>
         <div class="goodsActive">
             <button class="y">加入购物车</button>
@@ -61,10 +61,10 @@
 
             <div class="content">
                 <span class="close" @click="show = false">
-                    <img src="@/images/svgs/close-popup.svg" />
+                    <img src="http://123.60.208.96:3000/images/svgs/close-popup.svg" />
                 </span>
                 <ul class="itop">
-                    <img :src="data.imgSrc" />
+                    <img :src="PATH + data.imgSrc" />
                     <li>
                         <span class="price">￥{{ data.price }}</span>
                         <span class="count">库存2279件</span>
@@ -76,23 +76,23 @@
                         <span>颜色</span>
                         <div class="colorList">
                             <div class="colorTag">
-                                <img :src="data.imgSrc" />
+                                <img :src="PATH + data.imgSrc" />
                                 <span>黑色</span>
                             </div>
                             <div class="colorTag">
-                                <img :src="data.imgSrc" />
+                                <img :src="PATH + data.imgSrc" />
                                 <span>黑色</span>
                             </div>
                             <div class="colorTag">
-                                <img :src="data.imgSrc" />
+                                <img :src="PATH + data.imgSrc" />
                                 <span>黑色</span>
                             </div>
                             <div class="colorTag">
-                                <img :src="data.imgSrc" />
+                                <img :src="PATH + data.imgSrc" />
                                 <span>黑色</span>
                             </div>
                             <div class="colorTag">
-                                <img :src="data.imgSrc" />
+                                <img :src="PATH + data.imgSrc" />
                                 <span>黑色</span>
                             </div>
                         </div>
@@ -138,6 +138,7 @@ const data = JSON.parse(history.state.data)
 const router = useRouter()
 let count = ref<number>(0)
 let show = ref<boolean>(false)
+const PATH = 'http://123.60.208.96:3000/images/shop/'
 let crement = (type:string):number => count.value = type==='increment' ? count.value + 1 : count.value>0?count.value - 1 : 0;
 
     ; (() => {
