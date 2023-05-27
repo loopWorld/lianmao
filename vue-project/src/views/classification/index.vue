@@ -29,10 +29,6 @@
 <script setup lang="ts">
 import { ref, onUpdated, nextTick, onBeforeMount } from 'vue';
 import Menu from '@/components/menu/index.vue';
-import {
-    Skeleton,
-    SkeletonImage
-} from 'vant';
 
 let data = ref();
 let active = ref<number>(0)
