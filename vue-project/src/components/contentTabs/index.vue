@@ -71,13 +71,11 @@ let fn = (val: any): void => {
 }
 
     ; (async () => {
-        console.time()
         const res = await fetch('http://123.60.208.96:3000/fenlei')
         const result = await res.json()
         fenleiList.value = result.val;
         nextTick(() => {
             isLoading.value = false
-            console.timeEnd()
         })
         
     })()

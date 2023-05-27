@@ -14,17 +14,8 @@
                         <p>{{ ttitle }}</p>
                         <ul>
                             <li v-for="{ title: stitle, imgUrl }, index in productList" :key="stitle" class="s3">
-                                {{ (() => {
-                                    arr.push(true)
-                                    return undefined
-                                })() }}
-                                <Skeleton :loading="arr[index]">
-                                    <img v-mylazy="imgUrl" @load="fn1(index)"  />
-                                    <div>{{ stitle }}</div>
-                                    <template #template>
-                                        <SkeletonImage :style="{ width: '65px', height: '80px', background: '#fff' }" />
-                                    </template>
-                                </Skeleton>
+                                <img v-mylazy="imgUrl" />
+                                <div>{{ stitle }}</div>
                             </li>
                         </ul>
                     </div>
@@ -36,14 +27,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onUpdated, nextTick,onBeforeMount } from 'vue';
+import { ref, onUpdated, nextTick, onBeforeMount } from 'vue';
 import Menu from '@/components/menu/index.vue';
 import {
     Skeleton,
     SkeletonImage
 } from 'vant';
 
-let arr = ref<Array<boolean>>([])
 let data = ref();
 let active = ref<number>(0)
 
@@ -59,20 +49,19 @@ onUpdated(() => {
     })
 })
 onBeforeMount(() => {
-    
+
 })
 
 function fn(str: string) {
     return `<span>${str[0] + str[1]}</span><span>${str[2] + str[3]}</span>`
-}
-function fn1(index:number) {
-    arr.value[index] = false
 }
 
 </script>
 
 <style scoped lang="scss">
 section {
+    height: 100vh;
+    overflow: hidden;
     header {
         font-size: 18px;
         color: #3a3a3a;
@@ -88,7 +77,10 @@ section {
     .content {
         width: 100%;
         display: flex;
-        height: 567px;
+        height: 100vh;
+        box-sizing: border-box;
+        padding-bottom: 100px;
+        background: #f8f8f8;
 
         .lef {
             width: 80px;
